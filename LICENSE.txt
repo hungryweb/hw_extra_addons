@@ -1,7 +1,5 @@
 BSD License
 
-For React software
-
 Copyright (c) 2015-present, Hungryweb
 All rights reserved.
 
