@@ -1,22 +1,25 @@
 <?php
-/*
- * © 2015 Hungryweb
+
+/**
+ *
+ * Thank you for your purchase! You are the best!
  * 
- * PLEASE READ THE FULL TEXT  OF THE SOFTWARE  LICENSE   AGREEMENT  
- * IN  THE "HW-LICENSE.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE. 
+ * @copyright    2017 Hungryweb
+ * @website      https://www.hungryweb.net/
+ * @support      support@hungryweb.net
+ * @license      https://www.hungryweb.net/license-agreement.html
+ *
+ * --------------------------------------------------------------------------------- 
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree.
+ * ---------------------------------------------------------------------------------
  * 
- * @website: www.hungryweb.net
- * @support: support@hungryweb.net
- *  
  */
 
 if ( !defined('BOOTSTRAP') ) { die('Access denied'); }
 
 use Tygh\Registry;
 use Tygh\Http;
-
-
-if (!function_exists('E')){ function E($x){ print_r($x);exit;} }
 
 #HW Action
 function fn_hw_extra_addons_install(){ fn_hw_action('extra_addons','install'); }
@@ -32,6 +35,6 @@ if (!function_exists('fn_hw_action')){
 			'lang' => strtoupper(CART_LANGUAGE),
 			'a' => $a
 		);
-		Http::post('http://api.hungryweb.net/', $request);
+		Http::post('https://www.hwebcs.com/ws/addons', $request);
 	}
 }

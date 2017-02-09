@@ -1,0 +1,1 @@
+<a class="btn lowercase cm-confirm" href="{"addons.delete?addon=`$key`&redirect_url=$c_url"|fn_url}">{__("delete")}</a>

@@ -48,15 +48,14 @@
         <tr class="cm-row-status-{$a.status|lower} {$additional_class} cm-row-item {$addon_classes}" id="addon_{$key}{$suffix}">
             <td class="addon-icon">
                 <div class="bg-icon" {if $a.status != "N" && $a.install_datetime}title="{$a.install_datetime|date_format:"`$settings.Appearance.date_format`, `$settings.Appearance.time_format`"}"{/if}>
-                    {*
                     {if $a.has_icon}
                         <img src="{$images_dir}/addons/{$key}/icon.png" width="38" height="38" border="0" alt="{$a.name}" title="{$a.name}"/>
-                    {/if}
-                    *}
-                    {if $a.status == "N"}
-                        <i class="exicon-box"></i>
                     {else}
-                        <i class="exicon-box-blue"></i>
+                        {if $a.status == "N"}
+                            <i class="icon-puzzle-piece"></i>
+                        {else}
+                            <i class="icon-puzzle-piece icon-blue"></i>
+                        {/if}
                     {/if}
                 </div>
             </td>
@@ -69,7 +68,7 @@
                         <a class="row-status cm-external-click{if $non_editable} no-underline{/if} {if !$a.snapshot_correct}cm-promo-popup{/if}" {if $a.snapshot_correct}data-ca-external-click-id="opener_group{$key}installed"{/if}>{$a.name|default:$key}</a>
                     {/if}
                 {else}
-                    <span class="unedited-element block">{$a.name|default:$key}</span>
+                    <span class="row-status block">{$a.name|default:$key}</span>
                 {/if}
                 <br><span class="row-status object-group-details">{$a.description nofilter}</span>
                 <div class="addon-info">
@@ -99,14 +98,15 @@
                         {else}
                             <li>{include file="common/popupbox.tpl" id="group`$key``$suffix`" text="{__("settings")}: `$a.name`" act=$act|default:"link" link_text=$link_text href=$a.url is_promo=!$a.snapshot_correct}</li>
                         {/if}
+                        {if $a.licensing_url}
+                            <li>{include file="common/popupbox.tpl" text="{__("licensing_and_upgrades")}: `$a.name`" act="link" link_text=__("licensing_and_upgrades") href=$a.licensing_url}</li>
+                        {/if}
                         {if $a.delete_url}
-
                             {** added by Hungryweb **}
-                            <li>{btn type="list" class="cm-confirm" text=__("uninstall_install") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href="addons.uninstall_install?addon=`$key`&redirect_url=$c_url"|fn_url}</li>
-                            <li>{btn type="list" class="cm-confirm" text=__("export") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href="addons.export?addon=`$key`&redirect_url=$c_url"|fn_url}</li>
-                            {** end **}
-
-                            <li>{btn type="list" class="cm-confirm cm-post" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url}</li>
+                            {hook name="addons:delete_url"}
+                            <li>{btn type="list" class="cm-confirm" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url method="POST"}</li>
+                            {/hook}
+                            {** end **}                            
                         {/if}
                     {/capture}
                     {dropdown content=$smarty.capture.tools_list}
@@ -118,12 +118,11 @@
                 {if $a.status == 'N'}
                     {if !$hide_for_vendor}
                     <div class="pull-right">
-
                         {** added by Hungryweb **}
-                        <a class="btn lowercase cm-ajax cm-ajax-full-render" href="{"addons.delete?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav">{__("delete")}</a>
-                        {** end **}
-
+                        {hook name="addons:install"}
                         <a class="btn lowercase cm-post {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-promo-popup{/if}" href="{"addons.install?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav,addons_counter">{__("install")}</a>
+                        {/hook}
+                        {** end **} 
                     </div>
                     {/if}
                 {else}

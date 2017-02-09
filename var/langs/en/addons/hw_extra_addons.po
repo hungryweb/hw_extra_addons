@@ -10,12 +10,12 @@ msgid "Localized language name"
 msgstr "English"
 
 msgctxt "Addons::name::hw_extra_addons"
-msgid "Extra Add-ons Functionality"
-msgstr "Extra Add-ons Functionality"
+msgid "Extra add-ons functionality"
+msgstr "Extra add-ons functionality"
 
 msgctxt "Addons::description::hw_extra_addons"
-msgid "Add extra functionality to your CS-Cart add-ons."
-msgstr "Add extra functionality to your CS-Cart add-ons."
+msgid "Add extra functionality to CS-Cart manage add-ons page."
+msgstr "Add extra functionality to CS-Cart manage add-ons page."
 
 msgctxt "Languages::hw_extra_addons_deleted"
 msgid "Add-on has been deleted"
@@ -24,3 +24,11 @@ msgstr "Add-on has been deleted"
 msgctxt "Languages::uninstall_install"
 msgid "Uninstall + Install"
 msgstr "Uninstall + Install"
+
+msgctxt "Languages::addon_is_missing"
+msgid "The add-on doesn't exists"
+msgstr "The add-on doesn't exists"
+
+msgctxt "Languages::addon_is_active"
+msgid "Add-on is active and cannot be deleted, please uninistall first"
+msgstr "Add-on is active and cannot be deleted, please uninistall first"
