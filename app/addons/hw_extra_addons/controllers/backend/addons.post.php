@@ -122,6 +122,15 @@ if ($mode == 'export') {
 	              	);
               }
 
+              //HW icon also
+              $dir = 'media/images/addons/hw';
+	if(is_dir(Registry::get('config.dir.design_backend').$dir)){
+		fn_copy(
+			Registry::get('config.dir.design_backend').$dir,
+			$temp_path.'design/backend/'.$dir
+		);
+	}              
+
 	//current theme
 	$theme = Registry::get('settings.theme_name');
 

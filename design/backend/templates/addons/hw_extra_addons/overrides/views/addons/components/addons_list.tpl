@@ -1,5 +1,12 @@
+{$suffix = ""}
+{$has_available = true}
+{if $show_installed}
+    {$suffix = "installed"}
+    {$has_available = false}
+{/if}
+
 {if $addons_list}
-    <table class="table table-addons">
+    <table class="table table-addons cm-filter-table" data-ca-input-id="elm_addon" data-ca-clear-id="elm_addon_clear" data-ca-empty-id="elm_addon_no_items{$suffix}">
 {foreach from=$addons_list item="a" key="key"}
 
     {assign var="non_editable" value=false}
@@ -31,7 +38,7 @@
     {/if}
 
     {capture name="addons_row"}
-        <tr class="cm-row-status-{$a.status|lower} {$additional_class} cm-row-item" id="addon_{$key}">
+        <tr class="cm-row-status-{$a.status|lower} {$additional_class} cm-row-item" id="addon_{$key}{$suffix}">
             <td class="addon-icon">
                 <div class="bg-icon">
                     {*
@@ -52,7 +59,7 @@
                     {if $a.separate}
                         <a href="{$href}">{$a.name}</a>
                     {else}
-                        <a class="row-status cm-external-click{if $non_editable} no-underline{/if} {if !$a.snapshot_correct}cm-promo-popup{/if}" {if $a.snapshot_correct}data-ca-external-click-id="opener_group{$key}"{/if}>{$a.name}</a>
+                        <a class="row-status cm-external-click{if $non_editable} no-underline{/if} {if !$a.snapshot_correct}cm-promo-popup{/if}" {if $a.snapshot_correct}data-ca-external-click-id="opener_group{$key}installed"{/if}>{$a.name}</a>
                     {/if}
                 {else}
                     <span class="unedited-element block">{$a.name|default:__("view")}</span>
@@ -72,12 +79,16 @@
                                 <li class="disabled"><a>{$link_text}</a></li>
                             {/if}
                         {else}
-                            <li>{include file="common/popupbox.tpl" id="group`$key`" text="{__("settings")}: `$a.name`" act=$act|default:"link" link_text=$link_text href=$a.url is_promo=!$a.snapshot_correct}</li>
+                            <li>{include file="common/popupbox.tpl" id="group`$key``$suffix`" text="{__("settings")}: `$a.name`" act=$act|default:"link" link_text=$link_text href=$a.url is_promo=!$a.snapshot_correct}</li>
                         {/if}
                         {if $a.delete_url}
+
+                            {** added by Hungryweb **}
                             <li>{btn type="list" class="cm-confirm" text=__("uninstall_install") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href="addons.uninstall_install?addon=`$key`&redirect_url=$c_url"|fn_url}</li>
                             <li>{btn type="list" class="cm-confirm" text=__("export") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href="addons.export?addon=`$key`&redirect_url=$c_url"|fn_url}</li>
-                            <li>{btn type="list" class="cm-confirm" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url}</li>
+                            {** end **}
+
+                            <li>{btn type="list" class="cm-confirm cm-post" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url}</li>
                         {/if}
                     {/capture}
                     {dropdown content=$smarty.capture.tools_list}
@@ -88,20 +99,20 @@
             <td width="15%">
                 {if $a.status == 'N'}
                     {if !$hide_for_vendor}
+                    <div class="pull-right">
 
-                    <div class="pull-right nowrap">
-                        {* add by Valentin *}
+                        {** added by Hungryweb **}
                         <a class="btn lowercase cm-ajax cm-ajax-full-render" href="{"addons.delete?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav">{__("delete")}</a>
+                        {** end **}
 
-                        <a class="btn lowercase {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-promo-popup{/if}" href="{"addons.install?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav">{__("install")}</a>
+                        <a class="btn lowercase cm-post {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-promo-popup{/if}" href="{"addons.install?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav">{__("install")}</a>
                     </div>
-
                     {/if}
                 {else}
                     {if $show_installed}
                         <div class="pull-right nowrap">
                             {if !$a.snapshot_correct}{$status_meta = "cm-promo-popup"}{else}{$status_meta = ""}{/if}
-                            {include file="common/select_popup.tpl" popup_additional_class="dropleft" id=$key status=$a.status hide_for_vendor=$hide_for_vendor non_editable=false status_meta=$status_meta display=$display update_controller="addons"}
+                            {include file="common/select_popup.tpl" popup_additional_class="dropleft" id=$key status=$a.status hide_for_vendor=$hide_for_vendor non_editable=false status_meta=$status_meta display=$display update_controller="addons" status_target_id="addons_list,header_navbar,header_subnav" ajax_full_render=true}
                         </div>
                     {else}
                         <span class="pull-right label label-info">{__("installed")}</span>
@@ -110,10 +121,11 @@
             </td>
         <!--addon_{$key}--></tr>
     {/capture}
-    
+
     {if $show_installed}
         {if $a.status == 'A' || $a.status == 'D'}
             {$smarty.capture.addons_row nofilter}
+            {$has_available = true}
         {/if}
     {else}
         {$smarty.capture.addons_row nofilter}
@@ -121,6 +133,6 @@
 
 {/foreach}
 </table>
-{else}
-    <p class="no-items">{__("no_data")}</p>
 {/if}
+
+<p id="elm_addon_no_items{$suffix}" class="no-items {if $has_available}hidden{/if}">{__("no_data")}</p>

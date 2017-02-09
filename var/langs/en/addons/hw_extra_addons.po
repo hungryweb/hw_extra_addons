@@ -1,8 +1,13 @@
 msgid ""
-msgstr "Project-Id-Version: tygh"
+msgstr ""
+"Project-Id-Version: tygh\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: English\n"
 "Language: en_US\n"
+
+msgctxt "LanguageName"
+msgid "Localized language name"
+msgstr "English"
 
 msgctxt "Addons::name::hw_extra_addons"
 msgid "Extra Add-ons Functionality  (HW)"
