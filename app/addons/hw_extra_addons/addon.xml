@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <addon scheme="3.0">
    <id>hw_extra_addons</id>
-   <version>1.4</version>
+   <version>1.5</version>
    <priority>700</priority>
    <position>0</position>
    <status>active</status>
    <default_language>en</default_language>
    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+   <supplier>Hungryweb</supplier>
+   <supplier_link>https://www.hungryweb.net</supplier_link>   
    <authors>
        <author>
            <name>Hungryweb</name>
@@ -18,4 +20,9 @@
        <item for="install">fn_hw_extra_addons_install</item>
        <item for="uninstall">fn_hw_extra_addons_uninstall</item>
    </functions>
+    <compatibility>
+        <core_version>
+            <min>4.3.5</min>
+        </core_version>   
+    </compatibility>
 </addon>
