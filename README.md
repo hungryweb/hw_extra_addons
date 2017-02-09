@@ -1,4 +1,4 @@
-#  Extra Add-ons Functionality
+#  Extra add-ons functionality 
 The add-on add extra functionality to your CS-Cart manage add-ons page
 
 ## Installation
