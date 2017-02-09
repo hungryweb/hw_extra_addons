@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+   <id>hw_extra_addons</id>
+   <version>1.1</version>
+   <priority>700</priority>
+   <position>0</position>
+   <status>active</status>
+   <default_language>en</default_language>
+   <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+   <authors>
+       <author>
+           <name>Hungryweb</name>
+           <email>info@hungryweb.net</email>
+           <url>http://www.hungryweb.net</url>
+       </author>
+   </authors>
+   <functions>
+       <item for="install">fn_hw_extra_addons_install</item>
+       <item for="uninstall">fn_hw_extra_addons_uninstall</item>
+   </functions>
+</addon>

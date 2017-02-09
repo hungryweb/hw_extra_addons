@@ -1,0 +1,21 @@
+msgid ""
+msgstr "Project-Id-Version: tygh"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+
+msgctxt "Addons::name::hw_extra_addons"
+msgid "Extra Add-ons Functionality  (HW)"
+msgstr "Extra Add-ons Functionality  (HW)"
+
+msgctxt "Addons::description::hw_extra_addons"
+msgid "Add extra functionality to your CS-Cart add-ons. Developed by <a target=\"_blank\" href=\"https://www.hungryweb.net/\">Hungryweb</a>."
+msgstr "Add extra functionality to your CS-Cart add-ons. Developed by <a target=\"_blank\" href=\"https://www.hungryweb.net/\">Hungryweb</a>."
+
+msgctxt "Languages::hw_extra_addons_deleted"
+msgid "Add-on has been deleted"
+msgstr  "Add-on has been deleted"
+
+msgctxt "Languages::uninstall_install"
+msgid "Uninstall / Install"
+msgstr  "Uninstall / Install"
