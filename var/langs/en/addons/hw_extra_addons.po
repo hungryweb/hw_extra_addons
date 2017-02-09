@@ -14,8 +14,8 @@ msgstr "Add extra functionality to your CS-Cart add-ons. Developed by <a target=
 
 msgctxt "Languages::hw_extra_addons_deleted"
 msgid "Add-on has been deleted"
-msgstr  "Add-on has been deleted"
+msgstr "Add-on has been deleted"
 
 msgctxt "Languages::uninstall_install"
-msgid "Uninstall / Install"
-msgstr  "Uninstall / Install"
+msgid "Uninstall + Install"
+msgstr "Uninstall + Install"

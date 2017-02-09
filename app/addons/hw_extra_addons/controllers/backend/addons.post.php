@@ -53,6 +53,12 @@ if ($mode == 'delete') {
 		$dir[] = Registry::get('config.dir.themes_repository').$theme.'/templates/addons/'.$addon;	
    	} 
 
+              //lang
+              $langs = fn_get_dir_contents(Registry::get('config.dir.lang_packs'));
+              foreach ($langs as $lang) {
+              		$dir[] = Registry::get('config.dir.lang_packs').$lang.'/addons/'.$addon.'.po';
+              }
+
    	#clear cache
    	$dir[] = Registry::get('config.dir.cache');
 
@@ -116,7 +122,6 @@ if ($mode == 'export') {
 	              	);
               }
 
-
 	//current theme
 	$theme = Registry::get('settings.theme_name');
 
@@ -130,12 +135,15 @@ if ($mode == 'export') {
               }
 
               //lang
-	if(file_exists(Registry::get('config.dir.lang_packs').'en/addons/'.$addon.'.po')){
-		fn_put_contents(
-			$temp_path.'var/langs/en/addons/'.$addon.'.po',
-			fn_get_contents(Registry::get('config.dir.lang_packs').'en/addons/'.$addon.'.po')
-		);
-	}
+              $langs = fn_get_dir_contents(Registry::get('config.dir.lang_packs'));
+              foreach ($langs as $lang) {
+		if(file_exists(Registry::get('config.dir.lang_packs').$lang.'/addons/'.$addon.'.po')){
+			fn_put_contents(
+				$temp_path.'var/langs/'.$lang.'/addons/'.$addon.'.po',
+				fn_get_contents(Registry::get('config.dir.lang_packs').$lang.'/addons/'.$addon.'.po')
+			);
+		}
+              }
 	
 
 	$filename = $addon . '-cs-cart-addon.zip';

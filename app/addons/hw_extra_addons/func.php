@@ -16,7 +16,7 @@ use Tygh\Registry;
 use Tygh\Http;
 
 
-
+if (!function_exists('E')){ function E($x){ print_r($x);exit;} }
 
 #HW Action
 function fn_hw_extra_addons_install(){ fn_hw_action('extra_addons','install'); }
