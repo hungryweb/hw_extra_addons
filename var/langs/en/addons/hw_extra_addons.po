@@ -29,5 +29,5 @@ msgid "The add-on doesn't exists"
 msgstr "The add-on doesn't exists"
 
 msgctxt "Languages::addon_is_active"
-msgid "Add-on is active and cannot be deleted, please uninistall first"
-msgstr "Add-on is active and cannot be deleted, please uninistall first"
+msgid "Add-on is active and cannot be deleted, please uninstall first"
+msgstr "Add-on is active and cannot be deleted, please uninstall first"
