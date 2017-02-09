@@ -1,6 +1,5 @@
 msgid ""
-msgstr ""
-"Project-Id-Version: tygh\n"
+msgstr "Project-Id-Version: tygh\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: English\n"
 "Language: en_US\n"
