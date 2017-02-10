@@ -2,18 +2,16 @@
 
 /**
  *
- * Thank you for your purchase! You are the best!
- * 
  * @copyright    2017 Hungryweb
  * @website      https://www.hungryweb.net/
  * @support      support@hungryweb.net
  * @license      https://www.hungryweb.net/license-agreement.html
  *
- * --------------------------------------------------------------------------------- 
+ * ---------------------------------------------------------------------------------
  *  This source code is licensed under the BSD-style license found in the
  *  LICENSE file in the root directory of this source tree.
  * ---------------------------------------------------------------------------------
- * 
+ *
  */
 
 if ( !defined('BOOTSTRAP') ) { die('Access denied'); }
@@ -67,7 +65,7 @@ if ($mode == 'delete') {
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/mail/templates/addons/'.$addon;
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/media/images/addons/'.$addon;
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/media/fonts/addons/'.$addon;
-		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/templates/addons/'.$addon;	
+		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/templates/addons/'.$addon;
    	}
 
 	foreach ($available_themes['repo'] as $theme => $value) {
@@ -95,7 +93,7 @@ if ($mode == 'delete') {
    	}
 
    	fn_set_notification('N', __('notice'), __('hw_extra_addons_deleted'));
-    return array(CONTROLLER_STATUS_OK, "addons.manage");   	
+    return array(CONTROLLER_STATUS_OK, "addons.manage");
 }
 
 #EXPORT ADD-ON
@@ -132,7 +130,7 @@ if ($mode == 'export') {
 		'mail/templates/addons/'.$addon,
 		'media/images/addons/'.$addon,
 		'media/fonts/addons/'.$addon,
-		'templates/addons/'.$addon		
+		'templates/addons/'.$addon
 	);
 
 	#BACKEND
