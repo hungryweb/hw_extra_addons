@@ -9,7 +9,7 @@
    <default_language>en</default_language>
    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
    <supplier>Hungryweb</supplier>
-   <supplier_link>https://www.hungryweb.net</supplier_link>   
+   <supplier_link>https://www.hungryweb.net</supplier_link>
    <authors>
        <author>
            <name>Hungryweb</name>
@@ -17,13 +17,9 @@
            <url>https://www.hungryweb.net</url>
        </author>
    </authors>
-   <functions>
-       <item for="install">fn_hw_extra_addons_install</item>
-       <item for="uninstall">fn_hw_extra_addons_uninstall</item>
-   </functions>
     <compatibility>
         <core_version>
             <min>4.4.1</min>
-        </core_version>   
+        </core_version>
     </compatibility>
 </addon>
