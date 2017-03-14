@@ -185,7 +185,8 @@ if ($mode == 'export') {
 		}
 	}
 
-	$filename = $addon.'-addon-version-'.$addon_version.'-for-'.PRODUCT_NAME.'-'.PRODUCT_VERSION.'.zip';
+	$supplier = $addon_scheme->getSupplier();
+	$filename = $addon.'-addon-v'.$addon_version.'-for-'.PRODUCT_NAME.'-'.PRODUCT_VERSION.((!empty($supplier))?'-by-'.$supplier:'').'.zip';
 	$filename = strtolower($filename);
 
 	#COMPRESS FOLDER AND DOWNLOAD
