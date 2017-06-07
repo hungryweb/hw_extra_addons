@@ -142,7 +142,7 @@ if ($mode == 'export') {
 		);
 	}
 
-	#CURRENT THEME NAME
+	#ACTIVE THEME NAME
 	$theme_name = Registry::get('settings.theme_name');
 
     $theme = Themes::factory($theme_name);
@@ -159,19 +159,16 @@ if ($mode == 'export') {
 			);
 		}
     }
-	#FRONTEND
+    
+	#ACTIVE THEME
 	foreach ($theme_dirs as $dir) {
 		$dir_fullpath = Registry::get('config.dir.design_frontend').$theme_name.'/'.$dir;
 		$theme_folder = !empty($parent_theme)?$parent_theme:$theme_name;
-		$files = fn_get_dir_contents($dir_fullpath, true, true, '', '', true, array('.DS_Store'));
-		if(!empty($files)){
-			foreach ($files as $file) {
-				fn_copy(
-					$dir_fullpath.'/'.$file,
-					$temp_path.'var/themes_repository/'.$theme_folder.'/templates/addons/'.$addon.'/'.$file
-				);
-			}
-		}
+		if(!is_dir($dir_fullpath)) continue;
+		fn_copy(
+			$dir_fullpath,
+			$temp_path.'var/themes_repository/'.$theme_folder.'/'.$dir
+		);
 	}
 
 	#LANGS
