@@ -63,14 +63,14 @@
                 <div class="object-group-link-wrap">
                 {if !$non_editable}
                     {if $a.separate}
-                        <a href="{$href}"{if !$a.snapshot_correct} class="cm-promo-popup"{/if}>{$a.name|default:$key}</a>
+                        <a href="{$href}" class="row-status{if !$a.snapshot_correct} cm-promo-popup{/if}">{$a.name|default:$key}</a>
                     {else}
                         <a class="row-status cm-external-click{if $non_editable} no-underline{/if} {if !$a.snapshot_correct}cm-promo-popup{/if}" {if $a.snapshot_correct}data-ca-external-click-id="opener_group{$key}installed"{/if}>{$a.name|default:$key}</a>
                     {/if}
                 {else}
-                    <span class="row-status block">{$a.name|default:$key}</span>
+                    <span class="row-status block"><bdi>{$a.name|default:$key}</bdi></span>
                 {/if}
-                <br><span class="row-status object-group-details">{$a.description nofilter}</span>
+                    <br><span class="row-status object-group-details"><bdi>{$a.description nofilter}</bdi></span>
                 <div class="addon-info">
                     <small class="muted addon-version">{__("version")} {$a.version|default:0.1}</small>
                     {if $a.supplier}
@@ -106,7 +106,10 @@
                             {hook name="addons:delete_url"}
                             <li>{btn type="list" class="cm-confirm" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url method="POST"}</li>
                             {/hook}
-                            {** end **}                            
+                            {** end **}
+                        {/if}
+                        {if $a.refresh_url}
+                            <li>{btn type="list" text=__("refresh") href=$a.refresh_url method="POST"}</li>
                         {/if}
                     {/capture}
                     {dropdown content=$smarty.capture.tools_list}
@@ -122,7 +125,7 @@
                         {hook name="addons:install"}
                         <a class="btn lowercase cm-post {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-promo-popup{/if}" href="{"addons.install?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,header_subnav,addons_counter">{__("install")}</a>
                         {/hook}
-                        {** end **} 
+                        {** end **}                    
                     </div>
                     {/if}
                 {else}
