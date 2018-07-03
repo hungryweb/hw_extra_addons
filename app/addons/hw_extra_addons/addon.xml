@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <addon scheme="3.0">
    <id>hw_extra_addons</id>
-   <version>1.8</version>
+   <version>1.9</version>
    <priority>700</priority>
    <position>0</position>
    <status>active</status>
@@ -19,7 +19,7 @@
    </authors>
     <compatibility>
         <core_version>
-            <min>4.4.1</min>
+            <min>4.8.1</min>
         </core_version>
     </compatibility>
 </addon>
