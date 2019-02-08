@@ -105,7 +105,7 @@
                             {if $a.delete_url}
                                 {** added by Hungryweb **}
                                 {hook name="addons:delete_url"}                            
-                                <li>{btn type="list" class="cm-confirm" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,main_menu'] href=$a.delete_url method="POST"}</li>
+                                <li>{btn type="list" class="cm-confirm" text=__("uninstall") data=['data-ca-target-id'=>'addons_list,header_navbar,header_subnav'] href=$a.delete_url method="POST"}</li>
                                 {/hook}
                                 {** end **}                                
                             {/if}
@@ -124,7 +124,25 @@
                         <div class="pull-right">
                             {** added by Hungryweb **}
                             {hook name="addons:install"}                            
-                            <a class="btn lowercase cm-post {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-promo-popup{/if}" href="{"addons.install?addon=`$key`&redirect_url=$c_url"|fn_url}" data-ca-target-id="addons_list,header_navbar,main_menu,addons_counter">{__("install")}</a>
+                            <a
+                                class="btn lowercase cm-post {if $a.snapshot_correct}cm-ajax cm-ajax-full-render{else}cm-dialog-opener cm-dialog-auto-height{/if}"
+                                {if $a.snapshot_correct}
+                                    href="{"addons.install?addon=`$key`&return_url=`$c_url|escape:url`"|fn_url}"
+                                    data-ca-target-id="addons_list,header_navbar,header_subnav,addons_counter"
+                                {elseif "MULTIVENDOR"|fn_allowed_for}
+                                    {$promo_popup_title = __("mve_plus_license_required", ["[product]" => $smarty.const.PRODUCT_NAME])}
+
+                                    href="{"functionality_restrictions.mve_plus_license_required"|fn_url}"
+                                    data-ca-dialog-title="{$promo_popup_title}"
+                                {else}
+                                    {$promo_popup_title = __("ultimate_license_required", ["[product]" => $smarty.const.PRODUCT_NAME])}
+
+                                    href="{"functionality_restrictions.ultimate_license_required"|fn_url}"
+                                    data-ca-dialog-title="{$promo_popup_title}"
+                                {/if}
+                            >
+                                {__("install")}
+                            </a>
                             {/hook}
                             {** end **}
                         </div>
@@ -133,7 +151,7 @@
                         {if $show_installed}
                             <div class="pull-right nowrap">
                                 {if !$a.snapshot_correct}{$status_meta = "cm-promo-popup"}{else}{$status_meta = ""}{/if}
-                                {include file="common/select_popup.tpl" popup_additional_class="dropleft" id=$key status=$a.status hide_for_vendor=$hide_for_vendor non_editable=false status_meta=$status_meta display=$display update_controller="addons" status_target_id="addons_list,header_navbar,main_menu,addons_counter" ajax_full_render=true}
+                                {include file="common/select_popup.tpl" popup_additional_class="dropleft" id=$key status=$a.status st_return_url=$c_url|escape:url hide_for_vendor=$hide_for_vendor non_editable=false status_meta=$status_meta display=$display update_controller="addons" status_target_id="addons_list,header_navbar,header_subnav,addons_counter" ajax_full_render=true}
                             </div>
                         {else}
                             <span class="pull-right label label-info">{__("installed")}</span>
