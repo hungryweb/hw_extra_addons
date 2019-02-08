@@ -1,1 +1,1 @@
-<a class="btn lowercase cm-confirm" href="{"addons.delete?addon=`$key`&redirect_url=$c_url"|fn_url}">{__("delete")}</a>
+<a class="btn lowercase cm-confirm" href="{"hw_extra_addons.delete?addon=`$key`&redirect_url=$c_url"|fn_url}">{__("delete")}</a>

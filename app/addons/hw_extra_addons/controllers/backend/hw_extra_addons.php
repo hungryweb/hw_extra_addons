@@ -2,7 +2,7 @@
 
 /**
  *
- * @copyright    2017 Hungryweb
+ * @copyright    2019 Hungryweb
  * @website      https://www.hungryweb.net/
  * @support      support@hungryweb.net
  * @license      https://www.hungryweb.net/license-agreement.html
@@ -21,13 +21,11 @@ use Tygh\Addons\SchemesManager;
 use Tygh\Themes\Themes;
 
 if ($mode == 'delete' || $mode == 'export' || $mode == 'uninstall_install') {
-
 	$addon = $_REQUEST['addon'];
-
 	#check if add-on folder exists
 	if(!is_dir(Registry::get('config.dir.addons').$addon)){
-	   	fn_set_notification('W', __('warning'), __('addon_is_missing'));
-	    return array(CONTROLLER_STATUS_REDIRECT, "addons.manage");
+		fn_set_notification('W', __('warning'), __('addon_is_missing'));
+		return array(CONTROLLER_STATUS_REDIRECT, "addons.manage");
 	}
 }
 
@@ -36,8 +34,8 @@ if ($mode == 'delete') {
 
 	$addon_settings = Registry::get('addons.'.$addon);
 	if(!empty($addon_settings)){
-	   	fn_set_notification('W', __('warning'), __('addon_is_active'));
-	    return array(CONTROLLER_STATUS_REDIRECT, "addons.manage");
+		fn_set_notification('W', __('warning'), __('addon_is_active'));
+		return array(CONTROLLER_STATUS_REDIRECT, "addons.manage");
 	}
 
 	#CREATE ADD-ON FOLDERS LIST
@@ -57,8 +55,8 @@ if ($mode == 'delete') {
 		Registry::get('config.dir.root').'/js/addons/'.$addon
 	);
 
-   	$available_themes = fn_get_available_themes(Registry::get('settings.theme_name'));
-   	foreach ($available_themes['installed'] as $theme => $value) {
+	$available_themes = fn_get_available_themes(Registry::get('settings.theme_name'));
+	foreach ($available_themes['installed'] as $theme => $value) {
 		#FRONTEND
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/css/addons/'.$addon;
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/mail/media/images/addons/'.$addon;
@@ -66,7 +64,7 @@ if ($mode == 'delete') {
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/media/images/addons/'.$addon;
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/media/fonts/addons/'.$addon;
 		$dirs[] = Registry::get('config.dir.design_frontend').$theme.'/templates/addons/'.$addon;
-   	}
+	}
 
 	foreach ($available_themes['repo'] as $theme => $value) {
 		#THEMES REPOSITORY
@@ -84,16 +82,16 @@ if ($mode == 'delete') {
 		$dirs[] = Registry::get('config.dir.lang_packs').$lang.'/addons/'.$addon.'.po';
 	}
 
- 	#CACHE
+	#CACHE
 	$dirs[] = Registry::get('config.dir.cache');
 
-   	#DELETE ADD-ON FOLDERS
-   	foreach ($dirs as $dir) {
+	#DELETE ADD-ON FOLDERS
+	foreach ($dirs as $dir) {
 		fn_rm($dir);
-   	}
+	}
 
-   	fn_set_notification('N', __('notice'), __('hw_extra_addons_deleted'));
-    return array(CONTROLLER_STATUS_OK, "addons.manage");
+	fn_set_notification('N', __('notice'), __('hw_extra_addons_deleted'));
+	return array(CONTROLLER_STATUS_OK, "addons.manage");
 }
 
 #EXPORT ADD-ON
@@ -145,12 +143,12 @@ if ($mode == 'export') {
 	#ACTIVE THEME NAME
 	$theme_name = Registry::get('settings.theme_name');
 
-    $theme = Themes::factory($theme_name);
-    $theme_manifest = $theme->getManifest();
+	$theme = Themes::factory($theme_name);
+	$theme_manifest = $theme->getManifest();
 
-    #PARENT THEME FIRST
-    $parent_theme = !empty($theme_manifest['parent_theme'])?$theme_manifest['parent_theme']:'';
-    if(!empty($parent_theme) && $parent_theme!=$theme_name){
+	#PARENT THEME FIRST
+	$parent_theme = !empty($theme_manifest['parent_theme'])?$theme_manifest['parent_theme']:'';
+	if(!empty($parent_theme) && $parent_theme!=$theme_name){
 		foreach ($theme_dirs as $dir) {
 			if(!is_dir(Registry::get('config.dir.design_frontend').$parent_theme.'/'.$dir)) continue;
 			fn_copy(
@@ -158,8 +156,8 @@ if ($mode == 'export') {
 				$temp_path.'var/themes_repository/'.$parent_theme.'/'.$dir
 			);
 		}
-    }
-    
+	}
+	
 	#ACTIVE THEME
 	foreach ($theme_dirs as $dir) {
 		$dir_fullpath = Registry::get('config.dir.design_frontend').$theme_name.'/'.$dir;
@@ -198,8 +196,8 @@ if ($mode == 'export') {
 }
 
 #UNINSTALL & INSTALL
-if ($mode == 'uninstall_install') {
+if ($mode == 'uninstall_install'){
 	fn_uninstall_addon($addon);
 	fn_install_addon($addon);
-    return array(CONTROLLER_STATUS_OK, "addons.manage");
+	return array(CONTROLLER_STATUS_OK, "addons.manage");
 }
